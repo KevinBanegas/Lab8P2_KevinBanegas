@@ -6,7 +6,9 @@
 package lab8p2_kevinbanegas;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -356,7 +358,7 @@ public class SistemaControl extends javax.swing.JFrame {
                 Universo u = new Universo();
                 u.setNombre(nombreUniverso.getText());
                 universos.add(u);
-                DefaultComboBoxModel m = (DefaultComboBoxModel)cb_universos.getModel();
+                DefaultComboBoxModel m = (DefaultComboBoxModel) cb_universos.getModel();
                 m.addElement(u.getNombre());
             } else {
                 JOptionPane.showMessageDialog(this, "Error al ingresar datos", "Error", JOptionPane.WARNING_MESSAGE);
@@ -371,6 +373,22 @@ public class SistemaControl extends javax.swing.JFrame {
         try {
             seres = new ArrayList();
             Ser s;
+            Ser = new File("C:\\Users\\Usuario\\Documents\\2022\\Q3 Tercer Periodo\\Programación II\\Lab. Programación II\\Lab8P2_KevinBanegas\\SeresIndividuales");
+            File[] seresFile = Ser.listFiles();
+            FileInputStream entrada
+                    = new FileInputStream(Ser);
+            ObjectInputStream objeto
+                    = new ObjectInputStream(entrada);
+            for (File sere : seresFile) {
+                try {
+                    while ((s = (Ser) objeto.readObject()) != null) {
+                        seres.add(s);
+                    }
+                }catch(Exception e){
+                    
+                }
+            }
+            System.out.println(seres);
 
         } catch (Exception e) {
 
@@ -430,6 +448,7 @@ public class SistemaControl extends javax.swing.JFrame {
     }
 
     private File Ser;
+    private File Universo;
     private ArrayList<Ser> seres = new ArrayList();
     private ArrayList<Universo> universos = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
