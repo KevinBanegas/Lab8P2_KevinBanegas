@@ -2,17 +2,18 @@ package lab8p2_kevinbanegas;
 
 import java.io.Serializable;
 
-public class Ser implements Serializable{
+public class Ser implements Serializable {
+
     private String nombre;
     private int id;
     private int poder;
     private int años;
     private String raza;
-    private String procedencia;
-    
-    private static final long SerialVersionUID=101L;
+    private Universo procedencia;
 
-    public Ser(String nombre, int id, int poder, int años, String raza, String procedencia) {
+    private static final long SerialVersionUID = 101L;
+
+    public Ser(String nombre, int id, int poder, int años, String raza, Universo procedencia) {
         this.nombre = nombre;
         this.id = id;
         this.poder = poder;
@@ -64,17 +65,17 @@ public class Ser implements Serializable{
         this.raza = raza;
     }
 
-    public String getProcedencia() {
+    public Universo getProcedencia() {
         return procedencia;
     }
 
-    public void setProcedencia(String procedencia) {
+    public void setProcedencia(Universo procedencia) {
         this.procedencia = procedencia;
     }
-    
+
     @Override
     public String toString() {
         return "Ser{" + "nombre=" + nombre + ", id=" + id + ", poder=" + poder + ", a\u00f1os=" + años + ", raza=" + raza + ", procedencia=" + procedencia + '}';
     }
-    
+
 }

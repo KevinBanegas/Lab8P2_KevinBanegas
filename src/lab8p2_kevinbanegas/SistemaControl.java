@@ -322,11 +322,19 @@ public class SistemaControl extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void cargarGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarGuardarActionPerformed
-
-        dialog_Cargar.setModal(true);
-        dialog_Cargar.pack();
-        dialog_Cargar.setLocationRelativeTo(this);
-        dialog_Cargar.setVisible(true);
+        cargarSeres();
+        cargarUniversos();
+        DefaultComboBoxModel m = (DefaultComboBoxModel)cb_universos.getModel();
+        m.removeAllElements();
+        for (Universo universo : universos) {
+            m.addElement(universo.getNombre());
+        }
+        cb_universos.setModel(m);
+        JOptionPane.showMessageDialog(this, "Exito");
+//        dialog_Cargar.setModal(true);
+//        dialog_Cargar.pack();
+//        dialog_Cargar.setLocationRelativeTo(this);
+//        dialog_Cargar.setVisible(true);
 
     }//GEN-LAST:event_cargarGuardarActionPerformed
 
@@ -336,7 +344,7 @@ public class SistemaControl extends javax.swing.JFrame {
 
             s.setAños(Integer.parseInt(añosSer.getValue().toString()));
             s.setId(Integer.parseInt(idSer.getText()));
-            s.setProcedencia(cb_universos.getSelectedItem().toString());
+            s.setProcedencia((Universo)cb_universos.getSelectedItem());
             s.setNombre(nombreSer.getText());
             s.setPoder(Integer.parseInt(poderSer.getValue().toString()));
             s.setRaza(cb_razas.getSelectedItem().toString());
@@ -357,9 +365,14 @@ public class SistemaControl extends javax.swing.JFrame {
             if (!crearUniverso.getText().isEmpty()) {
                 Universo u = new Universo();
                 u.setNombre(nombreUniverso.getText());
-                universos.add(u);
-                DefaultComboBoxModel m = (DefaultComboBoxModel) cb_universos.getModel();
-                m.addElement(u.getNombre());
+                escribirUniversos(u);
+                cargarUniversos();
+
+                DefaultComboBoxModel m = new DefaultComboBoxModel();
+                for (Universo universo : universos) {
+                    m.addElement(universo);
+                }
+                cb_universos.setModel(m);
             } else {
                 JOptionPane.showMessageDialog(this, "Error al ingresar datos", "Error", JOptionPane.WARNING_MESSAGE);
 
@@ -373,19 +386,20 @@ public class SistemaControl extends javax.swing.JFrame {
         try {
             seres = new ArrayList();
             Ser s;
-            Ser = new File("C:\\Users\\Usuario\\Documents\\2022\\Q3 Tercer Periodo\\Programación II\\Lab. Programación II\\Lab8P2_KevinBanegas\\SeresIndividuales");
+            Ser = new File("./SeresIndividuales/");
             File[] seresFile = Ser.listFiles();
-            FileInputStream entrada
-                    = new FileInputStream(Ser);
-            ObjectInputStream objeto
-                    = new ObjectInputStream(entrada);
+            System.out.println(seresFile.length);
             for (File sere : seresFile) {
                 try {
-                    while ((s = (Ser) objeto.readObject()) != null) {
-                        seres.add(s);
-                    }
-                }catch(Exception e){
-                    
+                    FileInputStream entrada
+                            = new FileInputStream(sere);
+                    ObjectInputStream objeto
+                            = new ObjectInputStream(entrada);
+                    s = (Ser) objeto.readObject();
+                    seres.add(s);
+
+                } catch (Exception e) {
+
                 }
             }
             System.out.println(seres);
@@ -395,15 +409,59 @@ public class SistemaControl extends javax.swing.JFrame {
         }
     }
 
+    public void cargarUniversos() {
+        try {
+            universos = new ArrayList();
+            Universo u;
+            Universo = new File("./UniversosIndividuales/");
+            File[] universosFile = Universo.listFiles();
+            System.out.println(universosFile.length);
+            for (File uni : universosFile) {
+                try {
+                    FileInputStream entrada
+                            = new FileInputStream(uni);
+                    ObjectInputStream objeto
+                            = new ObjectInputStream(entrada);
+                    u = (Universo) objeto.readObject();
+                    universos.add(u);
+
+                } catch (Exception e) {
+
+                }
+            }
+            System.out.println(universos);
+
+        } catch (Exception e) {
+
+        }
+    }
+
     public void escribirSeres(Ser s) {
         FileOutputStream fw = null;
         ObjectOutputStream bw = null;
-        Ser = new File("C:\\Users\\Usuario\\Documents\\2022\\Q3 Tercer Periodo\\Programación II\\Lab. Programación II\\Lab8P2_KevinBanegas\\SeresIndividuales\\" + s.getId());
+        Ser = new File("./SeresIndividuales/" + s.getId());
         try {
             fw = new FileOutputStream(Ser);
             bw = new ObjectOutputStream(fw);
 
             bw.writeObject(s);
+
+            bw.flush();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar datos", "Error", JOptionPane.WARNING_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
+    public void escribirUniversos(Universo u) {
+        FileOutputStream fw = null;
+        ObjectOutputStream bw = null;
+        Universo = new File("./UniversosIndividuales/" + u.getNombre());
+        try {
+            fw = new FileOutputStream(Universo);
+            bw = new ObjectOutputStream(fw);
+
+            bw.writeObject(u);
 
             bw.flush();
         } catch (Exception e) {

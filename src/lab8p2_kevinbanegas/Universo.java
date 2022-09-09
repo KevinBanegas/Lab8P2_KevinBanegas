@@ -1,12 +1,15 @@
 package lab8p2_kevinbanegas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Universo {
+public class Universo implements Serializable{
     private String nombre;
     private ArrayList<Ser> seres = new ArrayList();
     private int size;
-
+    
+    private static final long SerialVersionUID = 102L; 
+    
     public Universo(String nombre) {
         this.nombre = nombre;
     }
@@ -40,7 +43,7 @@ public class Universo {
 
     @Override
     public String toString() {
-        return "Universo{" + "nombre=" + nombre + ", seres=" + seres + '}';
+        return nombre;
     }
     
     
