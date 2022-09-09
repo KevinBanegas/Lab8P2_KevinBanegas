@@ -75,7 +75,7 @@ public class Ser implements Serializable {
 
     @Override
     public String toString() {
-        return "Ser{" + "nombre=" + nombre + ", id=" + id + ", poder=" + poder + ", a\u00f1os=" + años + ", raza=" + raza + ", procedencia=" + procedencia + '}';
+        return nombre;
     }
 
 }

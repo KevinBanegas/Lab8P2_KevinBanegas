@@ -65,7 +65,7 @@ public class SistemaControl extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         añosSerMod = new javax.swing.JSpinner();
         poderSerMod = new javax.swing.JSpinner();
-        cb_universosMod = new javax.swing.JComboBox<>();
+        cb_SerMod = new javax.swing.JComboBox<>();
         cb_razasMod = new javax.swing.JComboBox<>();
         modButton = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -74,6 +74,7 @@ public class SistemaControl extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        cb_universosMod1 = new javax.swing.JComboBox<>();
         elimSer = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -104,6 +105,12 @@ public class SistemaControl extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jTabbedPane1ComponentShown(evt);
+            }
+        });
 
         agregarSer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -175,6 +182,11 @@ public class SistemaControl extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Agregar Ser", agregarSer);
 
+        modSer.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                modSerFocusGained(evt);
+            }
+        });
         modSer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
@@ -188,18 +200,23 @@ public class SistemaControl extends javax.swing.JFrame {
         modSer.add(añosSerMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 242, 56, 34));
         modSer.add(poderSerMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 242, 56, 34));
 
-        cb_universosMod.addActionListener(new java.awt.event.ActionListener() {
+        cb_SerMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_universosModActionPerformed(evt);
+                cb_SerModActionPerformed(evt);
             }
         });
-        modSer.add(cb_universosMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 114, 187, 37));
+        modSer.add(cb_SerMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 187, 37));
 
         cb_razasMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Humanos", "Amantos" }));
         modSer.add(cb_razasMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 370, 164, 37));
 
         modButton.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
         modButton.setText("Modificar");
+        modButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modButtonMouseClicked(evt);
+            }
+        });
         modSer.add(modButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 228, 187, 48));
 
         jLabel9.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
@@ -222,7 +239,14 @@ public class SistemaControl extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Litera-Serial", 0, 36)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Modificar Ser");
-        modSer.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 12, 298, 40));
+        modSer.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 298, 40));
+
+        cb_universosMod1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_universosMod1ActionPerformed(evt);
+            }
+        });
+        modSer.add(cb_universosMod1, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 114, 187, 37));
 
         jTabbedPane1.addTab("Modificar Ser", modSer);
 
@@ -348,6 +372,14 @@ public class SistemaControl extends javax.swing.JFrame {
             m.addElement(universo);
         }
         cb_universos.setModel(m);
+        cb_universosMod1.setModel(m);
+
+        DefaultComboBoxModel m1 = (DefaultComboBoxModel) cb_SerMod.getModel();
+        m1.removeAllElements();
+        for (Ser ser : seres) {
+            m1.addElement(ser);
+        }
+        cb_SerMod.setModel(m1);
         JOptionPane.showMessageDialog(this, "Exito");
 //        dialog_Cargar.setModal(true);
 //        dialog_Cargar.pack();
@@ -391,7 +423,6 @@ public class SistemaControl extends javax.swing.JFrame {
                     m.addElement(universo);
                 }
                 cb_universos.setModel(m);
-                cb_universosMod.setModel(m);
             } else {
                 JOptionPane.showMessageDialog(this, "Error al ingresar datos", "Error", JOptionPane.WARNING_MESSAGE);
 
@@ -460,23 +491,60 @@ public class SistemaControl extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenu1ActionPerformed
 
-    private void cb_universosModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_universosModActionPerformed
+    private void cb_SerModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_SerModActionPerformed
 
-        Ser s = (Ser) cb_universosMod.getSelectedItem();
-
-        nombreSerMod.setText(s.getNombre());
-        idSerMod.setText("" + s.getId());
-        poderSerMod.setValue(s.getPoder());
-        añosSerMod.setValue(s.getAños());
-        if ("Humanos".equals(s.getRaza())) {
-            cb_razasMod.setSelectedIndex(0);
-        } else {
-            cb_razasMod.setSelectedIndex(1);
+        Ser s = (Ser) cb_SerMod.getSelectedItem();
+        if (cb_SerMod.getSelectedItem() instanceof Ser) {
+            nombreSerMod.setText(s.getNombre());
+            idSerMod.setText("" + s.getId());
+            poderSerMod.setValue(s.getPoder());
+            añosSerMod.setValue(s.getAños());
+            if ("Humanos".equals(s.getRaza())) {
+                cb_razasMod.setSelectedIndex(0);
+            } else {
+                cb_razasMod.setSelectedIndex(1);
+            }
+            cb_SerMod.setSelectedItem(s.getProcedencia());
         }
-        cb_universosMod.setSelectedItem(s.getProcedencia());
 
 
-    }//GEN-LAST:event_cb_universosModActionPerformed
+    }//GEN-LAST:event_cb_SerModActionPerformed
+
+    private void cb_universosMod1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_universosMod1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_universosMod1ActionPerformed
+
+    private void modSerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_modSerFocusGained
+        DefaultComboBoxModel m = (DefaultComboBoxModel) cb_SerMod.getModel();
+        m.removeAllElements();
+        for (Ser sere : seres) {
+            m.addElement(sere);
+        }
+        cb_SerMod.setModel(m);
+    }//GEN-LAST:event_modSerFocusGained
+
+    private void jTabbedPane1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTabbedPane1ComponentShown
+        DefaultComboBoxModel m = (DefaultComboBoxModel) cb_SerMod.getModel();
+        m.removeAllElements();
+        for (Ser sere : seres) {
+            m.addElement(sere);
+        }
+        cb_SerMod.setModel(m);
+    }//GEN-LAST:event_jTabbedPane1ComponentShown
+
+    private void modButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modButtonMouseClicked
+        try {
+            int i = cb_SerMod.getSelectedIndex();
+            seres.get(i).setAños(Integer.parseInt(añosSerMod.getValue().toString()));
+            seres.get(i).setId(Integer.parseInt(idSerMod.getText()));
+            seres.get(i).setNombre(nombreSerMod.getText());
+            seres.get(i).setPoder(Integer.parseInt(poderSerMod.getValue().toString()));
+            seres.get(i).setProcedencia((Universo) cb_universosMod1.getSelectedItem());
+            seres.get(i).setRaza(cb_razasMod.getSelectedItem().toString());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar datos", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_modButtonMouseClicked
 
     public void cargarSeres() {
         try {
@@ -548,11 +616,6 @@ public class SistemaControl extends javax.swing.JFrame {
                 }
 
             }
-//            fw = new FileOutputStream(Ser);
-//            bw = new ObjectOutputStream(fw);
-//            for (Ser sere : seres) {
-//                bw.writeObject(sere);
-//            }
 
             bw.flush();
         } catch (Exception e) {
@@ -656,10 +719,11 @@ public class SistemaControl extends javax.swing.JFrame {
     private javax.swing.JTextField buscarSerNombre;
     private javax.swing.JTextArea caracteristicasSer;
     private javax.swing.JMenuItem cargarGuardar;
+    private javax.swing.JComboBox<String> cb_SerMod;
     private javax.swing.JComboBox<String> cb_razas;
     private javax.swing.JComboBox<String> cb_razasMod;
     private javax.swing.JComboBox<String> cb_universos;
-    private javax.swing.JComboBox<String> cb_universosMod;
+    private javax.swing.JComboBox<String> cb_universosMod1;
     private javax.swing.JButton crearSer;
     private javax.swing.JButton crearUniverso;
     private javax.swing.JDialog dialog_Cargar;
