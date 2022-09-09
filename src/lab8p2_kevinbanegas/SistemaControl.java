@@ -5,6 +5,13 @@
  */
 package lab8p2_kevinbanegas;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
@@ -27,21 +34,365 @@ public class SistemaControl extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialog_Cargar = new javax.swing.JDialog();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        agregarSer = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        nombreUniverso = new javax.swing.JTextField();
+        idSer = new javax.swing.JTextField();
+        añosSer = new javax.swing.JSpinner();
+        poderSer = new javax.swing.JSpinner();
+        cb_universos = new javax.swing.JComboBox<>();
+        cb_razas = new javax.swing.JComboBox<>();
+        crearUniverso = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        nombreSer = new javax.swing.JTextField();
+        crearSer = new javax.swing.JButton();
+        modSer = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        idSerMod = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        añosSerMod = new javax.swing.JSpinner();
+        poderSerMod = new javax.swing.JSpinner();
+        cb_universosMod = new javax.swing.JComboBox<>();
+        cb_razasMod = new javax.swing.JComboBox<>();
+        modButton = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        nombreSerMod = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        elimSer = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        buscarSer = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        buscarSerId = new javax.swing.JTextField();
+        buscarSerNombre = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        caracteristicasSer = new javax.swing.JTextArea();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        cargarGuardar = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+
+        javax.swing.GroupLayout dialog_CargarLayout = new javax.swing.GroupLayout(dialog_Cargar.getContentPane());
+        dialog_Cargar.getContentPane().setLayout(dialog_CargarLayout);
+        dialog_CargarLayout.setHorizontalGroup(
+            dialog_CargarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 435, Short.MAX_VALUE)
+        );
+        dialog_CargarLayout.setVerticalGroup(
+            dialog_CargarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 347, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        agregarSer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel1.setText("Nombre");
+        agregarSer.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel2.setText("ID");
+        agregarSer.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel3.setText("Poder");
+        agregarSer.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel4.setText("Años");
+        agregarSer.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel5.setText("Crear Universo");
+        agregarSer.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel6.setText("Raza");
+        agregarSer.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, -1, -1));
+        agregarSer.add(nombreUniverso, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 164, 37));
+        agregarSer.add(idSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 148, 37));
+        agregarSer.add(añosSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 56, 34));
+        agregarSer.add(poderSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 56, 34));
+
+        agregarSer.add(cb_universos, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, 187, 37));
+
+        cb_razas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Humanos", "Amantos" }));
+        agregarSer.add(cb_razas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 164, 37));
+
+        crearUniverso.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        crearUniverso.setText("Crear Universo");
+        crearUniverso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crearUniversoMouseClicked(evt);
+            }
+        });
+        crearUniverso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearUniversoActionPerformed(evt);
+            }
+        });
+        agregarSer.add(crearUniverso, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 190, 30));
+
+        jLabel14.setFont(new java.awt.Font("Litera-Serial", 0, 36)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Crear Ser");
+        agregarSer.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 298, 40));
+
+        jLabel16.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel16.setText("Universo Prodecencia");
+        agregarSer.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, -1, -1));
+        agregarSer.add(nombreSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 164, 37));
+
+        crearSer.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        crearSer.setText("Crear y Guardar");
+        crearSer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crearSerMouseClicked(evt);
+            }
+        });
+        agregarSer.add(crearSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 187, 48));
+
+        jTabbedPane1.addTab("Agregar Ser", agregarSer);
+
+        modSer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel7.setText("Universo Prodecencia");
+        modSer.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 85, -1, -1));
+        modSer.add(idSerMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 114, 148, 37));
+
+        jLabel8.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel8.setText("Raza");
+        modSer.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 341, -1, -1));
+        modSer.add(añosSerMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 242, 56, 34));
+        modSer.add(poderSerMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 242, 56, 34));
+
+        modSer.add(cb_universosMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 114, 187, 37));
+
+        cb_razasMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Humanos", "Amantos" }));
+        modSer.add(cb_razasMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 370, 164, 37));
+
+        modButton.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        modButton.setText("Modificar");
+        modSer.add(modButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 228, 187, 48));
+
+        jLabel9.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel9.setText("Nombre");
+        modSer.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 85, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel10.setText("ID");
+        modSer.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 85, -1, -1));
+        modSer.add(nombreSerMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 114, 164, 37));
+
+        jLabel11.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel11.setText("Poder");
+        modSer.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 213, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel12.setText("Años");
+        modSer.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 213, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Litera-Serial", 0, 36)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Modificar Ser");
+        modSer.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 12, 298, 40));
+
+        jTabbedPane1.addTab("Modificar Ser", modSer);
+
+        elimSer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel17.setFont(new java.awt.Font("Litera-Serial", 0, 36)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Eliminar Ser");
+        elimSer.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 298, 40));
+
+        elimSer.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 280, 60));
+
+        jButton1.setFont(new java.awt.Font("Litera-Serial", 0, 24)); // NOI18N
+        jButton1.setText("Eliminar");
+        elimSer.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 180, 70));
+
+        jTabbedPane1.addTab("Eliminar Ser", elimSer);
+
+        buscarSer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Litera-Serial", 0, 36)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Buscar Ser");
+        buscarSer.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 298, 40));
+        buscarSer.add(buscarSerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 170, 37));
+        buscarSer.add(buscarSerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 170, 37));
+
+        jButton2.setText("Buscar");
+        buscarSer.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 170, 30));
+
+        caracteristicasSer.setColumns(20);
+        caracteristicasSer.setRows(5);
+        caracteristicasSer.setWrapStyleWord(true);
+        buscarSer.add(caracteristicasSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, -1, 170));
+
+        jLabel18.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel18.setText("Nombre");
+        buscarSer.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel19.setText("ID");
+        buscarSer.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+
+        jTabbedPane1.addTab("Buscar Seres", buscarSer);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 808, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 435, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab5", jPanel5);
+
+        jMenu1.setText("Menu");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+
+        cargarGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        cargarGuardar.setText("Cargar");
+        cargarGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarGuardarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(cargarGuardar);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setText("Guardar");
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void cargarGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarGuardarActionPerformed
+
+        dialog_Cargar.setModal(true);
+        dialog_Cargar.pack();
+        dialog_Cargar.setLocationRelativeTo(this);
+        dialog_Cargar.setVisible(true);
+
+    }//GEN-LAST:event_cargarGuardarActionPerformed
+
+    private void crearSerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearSerMouseClicked
+        try {
+            Ser s = new Ser();
+
+            s.setAños(Integer.parseInt(añosSer.getValue().toString()));
+            s.setId(Integer.parseInt(idSer.getText()));
+            s.setProcedencia(cb_universos.getSelectedItem().toString());
+            s.setNombre(nombreSer.getText());
+            s.setPoder(Integer.parseInt(poderSer.getValue().toString()));
+            s.setRaza(cb_razas.getSelectedItem().toString());
+
+            seres.add(s);
+            escribirSeres(s);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al ingresar datos", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_crearSerMouseClicked
+
+    private void crearUniversoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearUniversoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crearUniversoActionPerformed
+
+    private void crearUniversoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearUniversoMouseClicked
+        try {
+            if (!crearUniverso.getText().isEmpty()) {
+                Universo u = new Universo();
+                u.setNombre(nombreUniverso.getText());
+                universos.add(u);
+                DefaultComboBoxModel m = (DefaultComboBoxModel)cb_universos.getModel();
+                m.addElement(u.getNombre());
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al ingresar datos", "Error", JOptionPane.WARNING_MESSAGE);
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al ingresar datos", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_crearUniversoMouseClicked
+
+    public void cargarSeres() {
+        try {
+            seres = new ArrayList();
+            Ser s;
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void escribirSeres(Ser s) {
+        FileOutputStream fw = null;
+        ObjectOutputStream bw = null;
+        Ser = new File("C:\\Users\\Usuario\\Documents\\2022\\Q3 Tercer Periodo\\Programación II\\Lab. Programación II\\Lab8P2_KevinBanegas\\SeresIndividuales\\" + s.getId());
+        try {
+            fw = new FileOutputStream(Ser);
+            bw = new ObjectOutputStream(fw);
+
+            bw.writeObject(s);
+
+            bw.flush();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar datos", "Error", JOptionPane.WARNING_MESSAGE);
+            e.printStackTrace();
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -78,6 +429,61 @@ public class SistemaControl extends javax.swing.JFrame {
         });
     }
 
+    private File Ser;
+    private ArrayList<Ser> seres = new ArrayList();
+    private ArrayList<Universo> universos = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel agregarSer;
+    private javax.swing.JSpinner añosSer;
+    private javax.swing.JSpinner añosSerMod;
+    private javax.swing.JPanel buscarSer;
+    private javax.swing.JTextField buscarSerId;
+    private javax.swing.JTextField buscarSerNombre;
+    private javax.swing.JTextArea caracteristicasSer;
+    private javax.swing.JMenuItem cargarGuardar;
+    private javax.swing.JComboBox<String> cb_razas;
+    private javax.swing.JComboBox<String> cb_razasMod;
+    private javax.swing.JComboBox<String> cb_universos;
+    private javax.swing.JComboBox<String> cb_universosMod;
+    private javax.swing.JButton crearSer;
+    private javax.swing.JButton crearUniverso;
+    private javax.swing.JDialog dialog_Cargar;
+    private javax.swing.JPanel elimSer;
+    private javax.swing.JTextField idSer;
+    private javax.swing.JTextField idSerMod;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton modButton;
+    private javax.swing.JPanel modSer;
+    private javax.swing.JTextField nombreSer;
+    private javax.swing.JTextField nombreSerMod;
+    private javax.swing.JTextField nombreUniverso;
+    private javax.swing.JSpinner poderSer;
+    private javax.swing.JSpinner poderSerMod;
     // End of variables declaration//GEN-END:variables
 }
