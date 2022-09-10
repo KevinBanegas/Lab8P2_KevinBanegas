@@ -88,8 +88,8 @@ public class SistemaControl extends javax.swing.JFrame {
         buscarSerNombre = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         caracteristicasSer = new javax.swing.JTextArea();
-        jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         cargarGuardar = new javax.swing.JMenuItem();
@@ -287,9 +287,9 @@ public class SistemaControl extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Litera-Serial", 0, 36)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Buscar Ser");
-        buscarSer.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 298, 40));
-        buscarSer.add(buscarSerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 170, 37));
-        buscarSer.add(buscarSerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 170, 37));
+        buscarSer.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 298, 40));
+        buscarSer.add(buscarSerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 170, 37));
+        buscarSer.add(buscarSerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 170, 37));
 
         jButton2.setText("Buscar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -297,20 +297,20 @@ public class SistemaControl extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
-        buscarSer.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 170, 30));
+        buscarSer.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 170, 30));
 
         caracteristicasSer.setColumns(20);
         caracteristicasSer.setRows(5);
         caracteristicasSer.setWrapStyleWord(true);
-        buscarSer.add(caracteristicasSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, -1, 170));
-
-        jLabel18.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
-        jLabel18.setText("Nombre");
-        buscarSer.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, -1, -1));
+        buscarSer.add(caracteristicasSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, 170));
 
         jLabel19.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
         jLabel19.setText("ID");
-        buscarSer.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+        buscarSer.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel21.setText("Nombre");
+        buscarSer.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
 
         jTabbedPane1.addTab("Buscar Seres", buscarSer);
 
@@ -436,11 +436,6 @@ public class SistemaControl extends javax.swing.JFrame {
                 u.setNombre(nombreUniverso.getText());
                 universos.add(u);
 
-                DefaultComboBoxModel m = new DefaultComboBoxModel();
-                for (Universo universo : universos) {
-                    m.addElement(universo);
-                }
-                cb_universos.setModel(m);
             } else {
                 JOptionPane.showMessageDialog(this, "Error al ingresar datos", "Error", JOptionPane.WARNING_MESSAGE);
 
@@ -519,37 +514,37 @@ public class SistemaControl extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         int i = seres.get(jComboBox1.getSelectedIndex()).getId();
         seres.remove(jComboBox1.getSelectedIndex());
-        File temp = new File("./SeresIndividuales/"+i);
+        File temp = new File("./SeresIndividuales/" + i);
         temp.delete();
         DefaultComboBoxModel m = (DefaultComboBoxModel) cb_SerMod.getModel();
         m.removeAllElements();
-        
+
         for (Ser sere : seres) {
             m.addElement(sere);
         }
         cb_SerMod.setModel(m);
         jComboBox1.setModel(m);
-        
-        
+
+
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         caracteristicasSer.setText("");
         int i = 0;
         for (Ser sere : seres) {
-            if(buscarSerNombre.getText().equals(sere.getNombre()) && Integer.parseInt(buscarSerId.getText())==sere.getId()){
-                caracteristicasSer.append("Nombre: " +sere.getNombre()+"\n");
-                caracteristicasSer.append("Raza: "+ sere.getRaza()+"\n");
-                caracteristicasSer.append("Años: "+ sere.getAños()+"\n");
-                caracteristicasSer.append("ID: " + sere.getId()+"\n");
-                caracteristicasSer.append("Poder: "+sere.getPoder()+"\n");
-                caracteristicasSer.append("Prodecencia: "+sere.getProcedencia()+"\n");
-            }else{
+            if (buscarSerNombre.getText().equals(sere.getNombre()) && Integer.parseInt(buscarSerId.getText()) == sere.getId()) {
+                caracteristicasSer.append("Nombre: " + sere.getNombre() + "\n");
+                caracteristicasSer.append("Raza: " + sere.getRaza() + "\n");
+                caracteristicasSer.append("Años: " + sere.getAños() + "\n");
+                caracteristicasSer.append("ID: " + sere.getId() + "\n");
+                caracteristicasSer.append("Poder: " + sere.getPoder() + "\n");
+                caracteristicasSer.append("Prodecencia: " + sere.getProcedencia() + "\n");
+            } else {
                 i++;
-            }      
+            }
         }
-        if(i==seres.size()){
-            caracteristicasSer.append("No se encontro el ser\n");
+        if (i == seres.size()) {
+            caracteristicasSer.append("No se encontro el ser, o no pertenece al universo. \n");
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -743,10 +738,10 @@ public class SistemaControl extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
