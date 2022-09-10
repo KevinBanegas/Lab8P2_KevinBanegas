@@ -40,6 +40,9 @@ public class SistemaControl extends javax.swing.JFrame {
     private void initComponents() {
 
         dialog_Cargar = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel20 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         agregarSer = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -93,15 +96,25 @@ public class SistemaControl extends javax.swing.JFrame {
         cargarGuardar = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jProgressBar1.setForeground(new java.awt.Color(255, 51, 102));
+        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 350, 50));
+
+        jLabel20.setFont(new java.awt.Font("Litera-Serial", 0, 24)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("Cargando...");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 160, 40));
+
         javax.swing.GroupLayout dialog_CargarLayout = new javax.swing.GroupLayout(dialog_Cargar.getContentPane());
         dialog_Cargar.getContentPane().setLayout(dialog_CargarLayout);
         dialog_CargarLayout.setHorizontalGroup(
             dialog_CargarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         dialog_CargarLayout.setVerticalGroup(
             dialog_CargarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 347, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -364,6 +377,12 @@ public class SistemaControl extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void cargarGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarGuardarActionPerformed
+        dialog_Cargar.setModal(true);
+        dialog_Cargar.pack();
+        dialog_Cargar.setLocationRelativeTo(this);
+        dialog_Cargar.setVisible(true);
+        Hilo h = new Hilo(jProgressBar1,seres);
+        h.start();
         cargarSeres();
         cargarUniversos();
         DefaultComboBoxModel m = (DefaultComboBoxModel) cb_universos.getModel();
@@ -381,11 +400,6 @@ public class SistemaControl extends javax.swing.JFrame {
         }
         cb_SerMod.setModel(m1);
         JOptionPane.showMessageDialog(this, "Exito");
-//        dialog_Cargar.setModal(true);
-//        dialog_Cargar.pack();
-//        dialog_Cargar.setLocationRelativeTo(this);
-//        dialog_Cargar.setVisible(true);
-
     }//GEN-LAST:event_cargarGuardarActionPerformed
 
     private void crearSerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearSerMouseClicked
@@ -745,6 +759,7 @@ public class SistemaControl extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -755,7 +770,9 @@ public class SistemaControl extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton modButton;
     private javax.swing.JPanel modSer;
