@@ -407,6 +407,7 @@ public class SistemaControl extends javax.swing.JFrame {
             m1.addElement(ser);
         }
         cb_SerMod.setModel(m1);
+        jComboBox1.setModel(m1);
         JOptionPane.showMessageDialog(this, "Exito");
     }//GEN-LAST:event_cargarGuardarActionPerformed
 
@@ -458,55 +459,6 @@ public class SistemaControl extends javax.swing.JFrame {
         escribirSeres();
         escribirUniversos();
         escribirTodo();
-        Universo = new File("./SeresUniversos/universos.kev");
-        Ser = new File("./SeresUniversos/seres.kev");
-        FileInputStream entrada = null;
-        ObjectInputStream objeto = null;
-        try {
-            entrada
-                    = new FileInputStream(Universo);
-            objeto
-                    = new ObjectInputStream(entrada);
-            Universo u;
-            while ((u = (Universo) objeto.readObject()) != null) {
-                System.out.println(u);
-            }
-        } catch (Exception e) {
-
-        }
-        try {
-            objeto.close();
-        } catch (IOException ex) {
-            Logger.getLogger(SistemaControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            entrada.close();
-        } catch (IOException ex) {
-            Logger.getLogger(SistemaControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            entrada
-                    = new FileInputStream(Ser);
-            objeto
-                    = new ObjectInputStream(entrada);
-            Ser s;
-            while ((s = (Ser) objeto.readObject()) != null) {
-                System.out.println(s);
-            }
-        } catch (Exception e) {
-
-        }
-        try {
-            objeto.close();
-        } catch (IOException ex) {
-            Logger.getLogger(SistemaControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            entrada.close();
-        } catch (IOException ex) {
-            Logger.getLogger(SistemaControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -674,7 +626,6 @@ public class SistemaControl extends javax.swing.JFrame {
         try {
             Universo = new File("./SeresUniversos/universos.kev");
             for (Universo u : universos) {
-                //Universo = new File("./SeresUniversos/universos.kev");
                 fw = new FileOutputStream(Universo);
                 bw = new ObjectOutputStream(fw);
                 bw.writeObject(u);
@@ -682,7 +633,6 @@ public class SistemaControl extends javax.swing.JFrame {
             }
             Ser = new File("./SeresUniversos/seres.kev");
             for (Ser sere : seres) {
-                //Ser = new File("./SeresUniversos/seres.kev");
                 fw = new FileOutputStream(Ser);
                 bw = new ObjectOutputStream(fw);
                 bw.writeObject(sere);
