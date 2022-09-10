@@ -89,7 +89,7 @@ public class SistemaControl extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         caracteristicasSer = new javax.swing.JTextArea();
         jLabel19 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         cargarGuardar = new javax.swing.JMenuItem();
@@ -278,7 +278,7 @@ public class SistemaControl extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-        elimSer.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 180, 70));
+        elimSer.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 180, 70));
 
         jTabbedPane1.addTab("Eliminar Ser", elimSer);
 
@@ -287,9 +287,9 @@ public class SistemaControl extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Litera-Serial", 0, 36)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Buscar Ser");
-        buscarSer.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 298, 40));
-        buscarSer.add(buscarSerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 170, 37));
-        buscarSer.add(buscarSerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 170, 37));
+        buscarSer.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 298, 40));
+        buscarSer.add(buscarSerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 170, 37));
+        buscarSer.add(buscarSerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 170, 37));
 
         jButton2.setText("Buscar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -297,20 +297,20 @@ public class SistemaControl extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
-        buscarSer.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 170, 30));
+        buscarSer.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 170, 30));
 
         caracteristicasSer.setColumns(20);
         caracteristicasSer.setRows(5);
         caracteristicasSer.setWrapStyleWord(true);
-        buscarSer.add(caracteristicasSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, 170));
+        buscarSer.add(caracteristicasSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, -1, 170));
 
         jLabel19.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
         jLabel19.setText("ID");
-        buscarSer.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
+        buscarSer.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
 
-        jLabel21.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
-        jLabel21.setText("Nombre");
-        buscarSer.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
+        jLabel22.setFont(new java.awt.Font("Litera-Serial", 0, 18)); // NOI18N
+        jLabel22.setText("Nombre");
+        buscarSer.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
 
         jTabbedPane1.addTab("Buscar Seres", buscarSer);
 
@@ -506,6 +506,7 @@ public class SistemaControl extends javax.swing.JFrame {
             seres.get(i).setPoder(Integer.parseInt(poderSerMod.getValue().toString()));
             seres.get(i).setProcedencia((Universo) cb_universosMod1.getSelectedItem());
             seres.get(i).setRaza(cb_razasMod.getSelectedItem().toString());
+            JOptionPane.showMessageDialog(this, "Modifico con Exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar datos", "Error", JOptionPane.WARNING_MESSAGE);
         }
@@ -525,7 +526,7 @@ public class SistemaControl extends javax.swing.JFrame {
         cb_SerMod.setModel(m);
         jComboBox1.setModel(m);
 
-
+        JOptionPane.showMessageDialog(this, "Eliminado Exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -618,7 +619,6 @@ public class SistemaControl extends javax.swing.JFrame {
             bw.flush();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar datos", "Error", JOptionPane.WARNING_MESSAGE);
-            e.printStackTrace();
         }
 
     }
@@ -659,6 +659,7 @@ public class SistemaControl extends javax.swing.JFrame {
                 fw = new FileOutputStream(Ser);
                 bw = new ObjectOutputStream(fw);
                 bw.writeObject(sere);
+                System.out.println(sere.getNombre());
             }
             bw.flush();
         } catch (Exception e) {
@@ -741,7 +742,7 @@ public class SistemaControl extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
