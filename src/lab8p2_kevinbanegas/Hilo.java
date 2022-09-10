@@ -6,6 +6,7 @@
 package lab8p2_kevinbanegas;
 
 import java.util.ArrayList;
+import javax.swing.JDialog;
 import javax.swing.JProgressBar;
 
 public class Hilo extends Thread {
@@ -13,12 +14,14 @@ public class Hilo extends Thread {
     private JProgressBar bar;
     private boolean work;
     private ArrayList<Ser> s = new ArrayList();
+    private JDialog d;
 
-    public Hilo(JProgressBar bar, ArrayList<Ser> s) {
+    public Hilo(JProgressBar bar, ArrayList<Ser> s, JDialog d) {
         this.bar = bar;
         this.s = s;
         bar.setMaximum(s.size());
         this.work = true;
+        this.d = d;
     }
 
     public boolean isWork() {
@@ -39,20 +42,16 @@ public class Hilo extends Thread {
 
     @Override
     public void run() {
-        int d = 0;
-        while (work) {
-            if (bar.getValue() > 0) {
-                d = bar.getValue();
-            }
-            bar.setValue(bar.getMaximum() - d);
-            try {
-                Thread.sleep(100);
+        for (Ser ser : s) {
+            try{
+            bar.setValue(bar.getValue() + 1);
+            
+                Thread.sleep(1000);
             } catch (Exception e) {
 
             }
-            if (bar.getValue() == bar.getMaximum()) {
-                work = false;
-            }
+
         }
+        d.setVisible(false);
     }
 }

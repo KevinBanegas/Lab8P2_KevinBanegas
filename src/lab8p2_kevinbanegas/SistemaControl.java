@@ -41,8 +41,8 @@ public class SistemaControl extends javax.swing.JFrame {
 
         dialog_Cargar = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
-        jProgressBar1 = new javax.swing.JProgressBar();
         jLabel20 = new javax.swing.JLabel();
+        jProgressBar2 = new javax.swing.JProgressBar();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         agregarSer = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -96,25 +96,25 @@ public class SistemaControl extends javax.swing.JFrame {
         cargarGuardar = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        dialog_Cargar.setUndecorated(true);
 
-        jProgressBar1.setForeground(new java.awt.Color(255, 51, 102));
-        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 350, 50));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel20.setFont(new java.awt.Font("Litera-Serial", 0, 24)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Cargando...");
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 160, 40));
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 160, 40));
+        jPanel1.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 370, 50));
 
         javax.swing.GroupLayout dialog_CargarLayout = new javax.swing.GroupLayout(dialog_Cargar.getContentPane());
         dialog_Cargar.getContentPane().setLayout(dialog_CargarLayout);
         dialog_CargarLayout.setHorizontalGroup(
             dialog_CargarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
         );
         dialog_CargarLayout.setVerticalGroup(
             dialog_CargarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -377,13 +377,21 @@ public class SistemaControl extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void cargarGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarGuardarActionPerformed
+
+        cargarSeres();
+        System.out.println(seres.size());
+        jProgressBar2.setMaximum(seres.size());
+        Hilo h = new Hilo(jProgressBar2, seres, dialog_Cargar);
+        h.start();
         dialog_Cargar.setModal(true);
         dialog_Cargar.pack();
         dialog_Cargar.setLocationRelativeTo(this);
         dialog_Cargar.setVisible(true);
-        Hilo h = new Hilo(jProgressBar1,seres);
-        h.start();
-        cargarSeres();
+        if (jProgressBar2.getMaximum() == seres.size()) {
+            jProgressBar2.setValue(0);
+            dialog_Cargar.setVisible(false);
+        }
+        dialog_Cargar.setVisible(false);
         cargarUniversos();
         DefaultComboBoxModel m = (DefaultComboBoxModel) cb_universos.getModel();
         m.removeAllElements();
@@ -670,6 +678,7 @@ public class SistemaControl extends javax.swing.JFrame {
                 fw = new FileOutputStream(Universo);
                 bw = new ObjectOutputStream(fw);
                 bw.writeObject(u);
+                System.out.println(u);
             }
             Ser = new File("./SeresUniversos/seres.kev");
             for (Ser sere : seres) {
@@ -677,6 +686,7 @@ public class SistemaControl extends javax.swing.JFrame {
                 fw = new FileOutputStream(Ser);
                 bw = new ObjectOutputStream(fw);
                 bw.writeObject(sere);
+                System.out.println(sere);
             }
             bw.flush();
         } catch (Exception e) {
@@ -772,7 +782,7 @@ public class SistemaControl extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton modButton;
     private javax.swing.JPanel modSer;
