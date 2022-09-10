@@ -90,7 +90,6 @@ public class SistemaControl extends javax.swing.JFrame {
         caracteristicasSer = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         cargarGuardar = new javax.swing.JMenuItem();
@@ -274,6 +273,11 @@ public class SistemaControl extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Litera-Serial", 0, 24)); // NOI18N
         jButton1.setText("Eliminar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         elimSer.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 180, 70));
 
         jTabbedPane1.addTab("Eliminar Ser", elimSer);
@@ -288,6 +292,11 @@ public class SistemaControl extends javax.swing.JFrame {
         buscarSer.add(buscarSerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 170, 37));
 
         jButton2.setText("Buscar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         buscarSer.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 170, 30));
 
         caracteristicasSer.setColumns(20);
@@ -304,19 +313,6 @@ public class SistemaControl extends javax.swing.JFrame {
         buscarSer.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
 
         jTabbedPane1.addTab("Buscar Seres", buscarSer);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 808, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("tab5", jPanel5);
 
         jMenu1.setText("Menu");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -379,7 +375,6 @@ public class SistemaControl extends javax.swing.JFrame {
     private void cargarGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarGuardarActionPerformed
 
         cargarSeres();
-        System.out.println(seres.size());
         jProgressBar2.setMaximum(seres.size());
         Hilo h = new Hilo(jProgressBar2, seres, dialog_Cargar);
         h.start();
@@ -495,6 +490,7 @@ public class SistemaControl extends javax.swing.JFrame {
             m.addElement(sere);
         }
         cb_SerMod.setModel(m);
+        jComboBox1.setModel(m);
     }//GEN-LAST:event_modSerFocusGained
 
     private void jTabbedPane1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTabbedPane1ComponentShown
@@ -520,13 +516,49 @@ public class SistemaControl extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_modButtonMouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        int i = seres.get(jComboBox1.getSelectedIndex()).getId();
+        seres.remove(jComboBox1.getSelectedIndex());
+        File temp = new File("./SeresIndividuales/"+i);
+        temp.delete();
+        DefaultComboBoxModel m = (DefaultComboBoxModel) cb_SerMod.getModel();
+        m.removeAllElements();
+        
+        for (Ser sere : seres) {
+            m.addElement(sere);
+        }
+        cb_SerMod.setModel(m);
+        jComboBox1.setModel(m);
+        
+        
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        caracteristicasSer.setText("");
+        int i = 0;
+        for (Ser sere : seres) {
+            if(buscarSerNombre.getText().equals(sere.getNombre()) && Integer.parseInt(buscarSerId.getText())==sere.getId()){
+                caracteristicasSer.append("Nombre: " +sere.getNombre()+"\n");
+                caracteristicasSer.append("Raza: "+ sere.getRaza()+"\n");
+                caracteristicasSer.append("Años: "+ sere.getAños()+"\n");
+                caracteristicasSer.append("ID: " + sere.getId()+"\n");
+                caracteristicasSer.append("Poder: "+sere.getPoder()+"\n");
+                caracteristicasSer.append("Prodecencia: "+sere.getProcedencia()+"\n");
+            }else{
+                i++;
+            }      
+        }
+        if(i==seres.size()){
+            caracteristicasSer.append("No se encontro el ser\n");
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
+
     public void cargarSeres() {
         try {
             seres = new ArrayList();
             Ser s;
             Ser = new File("./SeresIndividuales/");
             File[] seresFile = Ser.listFiles();
-            System.out.println(seresFile.length);
             for (File sere : seresFile) {
                 try {
                     FileInputStream entrada
@@ -540,7 +572,6 @@ public class SistemaControl extends javax.swing.JFrame {
 
                 }
             }
-            System.out.println(seres);
 
         } catch (Exception e) {
 
@@ -553,7 +584,6 @@ public class SistemaControl extends javax.swing.JFrame {
             Universo u;
             Universo = new File("./UniversosIndividuales/");
             File[] universosFile = Universo.listFiles();
-            System.out.println(universosFile.length);
             for (File uni : universosFile) {
                 try {
                     FileInputStream entrada
@@ -567,7 +597,6 @@ public class SistemaControl extends javax.swing.JFrame {
 
                 }
             }
-            System.out.println(universos);
 
         } catch (Exception e) {
 
@@ -629,14 +658,12 @@ public class SistemaControl extends javax.swing.JFrame {
                 fw = new FileOutputStream(Universo);
                 bw = new ObjectOutputStream(fw);
                 bw.writeObject(u);
-                System.out.println(u);
             }
             Ser = new File("./SeresUniversos/seres.kev");
             for (Ser sere : seres) {
                 fw = new FileOutputStream(Ser);
                 bw = new ObjectOutputStream(fw);
                 bw.writeObject(sere);
-                System.out.println(sere);
             }
             bw.flush();
         } catch (Exception e) {
@@ -731,7 +758,6 @@ public class SistemaControl extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton modButton;

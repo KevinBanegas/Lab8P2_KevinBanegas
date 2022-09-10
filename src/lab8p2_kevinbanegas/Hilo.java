@@ -12,7 +12,6 @@ import javax.swing.JProgressBar;
 public class Hilo extends Thread {
 
     private JProgressBar bar;
-    private boolean work;
     private ArrayList<Ser> s = new ArrayList();
     private JDialog d;
 
@@ -20,16 +19,7 @@ public class Hilo extends Thread {
         this.bar = bar;
         this.s = s;
         bar.setMaximum(s.size());
-        this.work = true;
         this.d = d;
-    }
-
-    public boolean isWork() {
-        return work;
-    }
-
-    public void setWork(boolean work) {
-        this.work = work;
     }
 
     public JProgressBar getBar() {
